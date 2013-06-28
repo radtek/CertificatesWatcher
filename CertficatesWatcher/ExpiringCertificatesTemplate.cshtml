@@ -1,0 +1,25 @@
+@* Generator: Template *@
+@using System.Collections.Generic
+@using System.Security.Cryptography.X509Certificates
+
+@functions {
+    public string Title { get { return "Список устаривающих сертификатов"; } }
+
+    public string ServerName { get; set; }
+
+    public ICollection<X509Certificate2> ExpiringCertificates { get; set; }
+}
+<p>Внимание!</p>
+
+<p>На сервере @ServerName устаривают следующие сертификаты:</p>
+
+<div class="certificates"> 
+@foreach (var cert in ExpiringCertificates)
+{
+    <p>
+        @cert.GetNameInfo(X509NameType.SimpleName, false) — @cert.NotAfter.ToString("dd.MM.yyyy HH:mm")
+    </p>
+}
+</div>
+
+<p>Это автоматическое сообщение сгенерированно сервисом отслеживания сертфикатов.</p>
