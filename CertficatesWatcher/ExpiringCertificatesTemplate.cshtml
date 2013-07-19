@@ -17,7 +17,7 @@
 @foreach (var cert in ExpiringCertificates)
 {
     <p>
-        @cert.GetNameInfo(X509NameType.SimpleName, false) — @cert.NotAfter.ToString("dd.MM.yyyy HH:mm")
+        @cert.GetOrganization() (@cert.GetNameInfo(X509NameType.SimpleName, false)) — @cert.NotAfter.ToString("dd.MM.yyyy HH:mm")
     </p>
 }
 </div>
