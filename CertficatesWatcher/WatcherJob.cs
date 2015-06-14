@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
+using CertificatesWatcher.Configuration;
 using Quartz;
 
 namespace CertificatesWatcher
@@ -11,7 +12,7 @@ namespace CertificatesWatcher
 
         public void Execute(IJobExecutionContext context)
         {
-            var certificates = CertificateWatcher.GetExpiringCertificates();
+            var certificates = CertificateWatcher.GetExpiringCertificates(TimeSpan.FromDays(Config.Current.DaysToExpiration));
 
             if (certificates.Any())
             {

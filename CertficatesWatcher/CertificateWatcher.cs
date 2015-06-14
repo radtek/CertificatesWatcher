@@ -56,12 +56,12 @@ namespace CertificatesWatcher
         }
 
 
-        public ICollection<X509Certificate2> GetExpiringCertificates()
+        public ICollection<X509Certificate2> GetExpiringCertificates(TimeSpan beforeExpiration)
         {
             using (var wrapper = new StoresWraper(_stores))
             {
                 return
-                    wrapper.Certificates.Where(cert => (cert.NotAfter - DateTime.Now) < TimeSpan.FromDays(30)).OrderBy(cert=>cert.NotAfter).ToList();
+                    wrapper.Certificates.Where(cert => (cert.NotAfter - DateTime.Now) < beforeExpiration).OrderBy(cert => cert.NotAfter).ToList();
             }
         }
     }

@@ -1,27 +1,27 @@
+using System;
 using System.Configuration;
-using System.Xml;
 using System.Xml.Serialization;
 
 namespace CertificatesWatcher.Configuration
 {
     [XmlRoot(SectionName)]
-    public sealed class Config : IConfigurationSectionHandler
+    public sealed class Config : ConfigurationSection
     {
         private const string SectionName = "cw";
 
-        [XmlAttribute("mails")]
+        private static readonly Lazy<Config> _current =
+            new Lazy<Config>(() => (Config)ConfigurationManager.GetSection(SectionName));
+
+
+        [ConfigurationProperty("mails", IsRequired = true)]
         public string Mails { get; set; }
+
+        [ConfigurationProperty("daysToExpiration", IsRequired = false, DefaultValue = 30)]
+        public int DaysToExpiration { get; set; }
 
         public static Config Current
         {
-            get { return (Config) ConfigurationManager.GetSection(SectionName); }
-        }
-
-        public object Create(object parent, object configContext, XmlNode section)
-        {
-            var serializer = new XmlSerializer(GetType());
-            var reader = new XmlNodeReader(section);
-            return serializer.Deserialize(reader);
+            get { return _current.Value; }
         }
     }
 }

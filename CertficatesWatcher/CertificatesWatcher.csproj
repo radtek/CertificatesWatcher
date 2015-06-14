@@ -72,11 +72,6 @@
       <DependentUpon>ExpiringCertificatesTemplate.cshtml</DependentUpon>
     </Compile>
     <Compile Include="MailSender.cs" />
-    <Compile Include="SampleTemplate.generated.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SampleTemplate.cshtml</DependentUpon>
-    </Compile>
     <Compile Include="ScheduleSettings.cs" />
     <Compile Include="Service.cs">
       <SubType>Component</SubType>
@@ -103,10 +98,6 @@
       <LastGenOutput>ExpiringCertificatesTemplate.generated.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
-    <None Include="SampleTemplate.cshtml">
-      <Generator>RazorGenerator</Generator>
-      <LastGenOutput>SampleTemplate.generated.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Service.resx">
