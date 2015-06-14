@@ -30,12 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             this.buttonInstall = new System.Windows.Forms.Button();
+            this.cWServiceStateBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.buttonStart = new System.Windows.Forms.Button();
             this.buttonStop = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.labelStatus = new System.Windows.Forms.Label();
             this.buttonUninstall = new System.Windows.Forms.Button();
-            this.cWServiceStateBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.cWServiceStateBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -46,9 +46,13 @@
             this.buttonInstall.Name = "buttonInstall";
             this.buttonInstall.Size = new System.Drawing.Size(75, 23);
             this.buttonInstall.TabIndex = 0;
-            this.buttonInstall.Text = "Установить";
+            this.buttonInstall.Text = "Install";
             this.buttonInstall.UseVisualStyleBackColor = true;
             this.buttonInstall.Click += new System.EventHandler(this.buttonInstall_Click);
+            // 
+            // cWServiceStateBindingSource
+            // 
+            this.cWServiceStateBindingSource.DataSource = typeof(CertificatesWatcher.Installer.CWServiceState);
             // 
             // buttonStart
             // 
@@ -57,7 +61,7 @@
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(75, 23);
             this.buttonStart.TabIndex = 1;
-            this.buttonStart.Text = "Запустить";
+            this.buttonStart.Text = "Run";
             this.buttonStart.UseVisualStyleBackColor = true;
             this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
             // 
@@ -68,7 +72,7 @@
             this.buttonStop.Name = "buttonStop";
             this.buttonStop.Size = new System.Drawing.Size(75, 23);
             this.buttonStop.TabIndex = 2;
-            this.buttonStop.Text = "Остановить";
+            this.buttonStop.Text = "Stop";
             this.buttonStop.UseVisualStyleBackColor = true;
             this.buttonStop.Click += new System.EventHandler(this.buttonStop_Click);
             // 
@@ -77,9 +81,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(347, 17);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(47, 13);
+            this.label1.Size = new System.Drawing.Size(43, 13);
             this.label1.TabIndex = 3;
-            this.label1.Text = "Статус: ";
+            this.label1.Text = "Status: ";
             // 
             // labelStatus
             // 
@@ -98,13 +102,9 @@
             this.buttonUninstall.Name = "buttonUninstall";
             this.buttonUninstall.Size = new System.Drawing.Size(75, 23);
             this.buttonUninstall.TabIndex = 5;
-            this.buttonUninstall.Text = "Удалить";
+            this.buttonUninstall.Text = "Uninstall";
             this.buttonUninstall.UseVisualStyleBackColor = true;
             this.buttonUninstall.Click += new System.EventHandler(this.buttonUninstall_Click);
-            // 
-            // cWServiceStateBindingSource
-            // 
-            this.cWServiceStateBindingSource.DataSource = typeof(CWServiceState);
             // 
             // FormMain
             // 

@@ -1,6 +1,6 @@
 ﻿using System.ServiceProcess;
 
-namespace CertficatesWatcher
+namespace CertificatesWatcher
 {
     static class Program
     {

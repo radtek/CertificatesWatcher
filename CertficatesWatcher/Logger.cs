@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace CertficatesWatcher
+namespace CertificatesWatcher
 {
     public static class Logger
     {

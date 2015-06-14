@@ -3,7 +3,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
 using NUnit.Framework;
 
-namespace CertficatesWatcher
+namespace CertificatesWatcher
 {
     public static class CertHelper
     {

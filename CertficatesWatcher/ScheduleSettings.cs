@@ -4,7 +4,7 @@ using System.Diagnostics;
 using Quartz;
 using Quartz.Impl;
 
-namespace CertficatesWatcher
+namespace CertificatesWatcher
 {
     public class ScheduleSettings
     {

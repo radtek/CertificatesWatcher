@@ -2,7 +2,7 @@
 using System.Linq;
 using System.ServiceProcess;
 using CertificatesWatcher.Installer.Annotations;
-using CertficatesWatcher;
+using CertificatesWatcher;
 
 namespace CertificatesWatcher.Installer
 {

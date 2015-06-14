@@ -1,4 +1,4 @@
-﻿namespace CertficatesWatcher
+﻿namespace CertificatesWatcher
 {
     partial class ProjectInstaller
     {

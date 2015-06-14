@@ -4,9 +4,9 @@ using System.Net.Mail;
 using System.Net.Mime;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using CertficatesWatcher.Configuration;
+using CertificatesWatcher.Configuration;
 
-namespace CertficatesWatcher
+namespace CertificatesWatcher
 {
     internal class MailSender
     {

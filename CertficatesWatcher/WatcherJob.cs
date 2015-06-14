@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Linq;
 using Quartz;
 
-namespace CertficatesWatcher
+namespace CertificatesWatcher
 {
     public class WatcherJob : IJob
     {

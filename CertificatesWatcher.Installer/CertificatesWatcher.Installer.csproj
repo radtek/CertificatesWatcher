@@ -86,9 +86,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CertficatesWatcher\CertficatesWatcher.csproj">
+    <ProjectReference Include="..\CertficatesWatcher\CertificatesWatcher.csproj">
       <Project>{fa156c5f-2b3b-4c31-88c6-fbc3522abea5}</Project>
-      <Name>CertficatesWatcher</Name>
+      <Name>CertificatesWatcher</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

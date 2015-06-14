@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.ServiceProcess;
 
-namespace CertficatesWatcher
+namespace CertificatesWatcher
 {
     public partial class CertficatesWatcherService : ServiceBase
     {
