@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel;
 using System.Linq;
 using System.ServiceProcess;
+using System.Threading.Tasks;
 using CertificatesWatcher.Installer.Annotations;
-using CertificatesWatcher;
 
 namespace CertificatesWatcher.Installer
 {
@@ -50,34 +50,53 @@ namespace CertificatesWatcher.Installer
             get { return IsInstalled ? CWService.Status.ToString() : "Is not installed"; }
         }
 
-        public void Install()
+        public async Task Install()
         {
-            ServiceInstaller.InstallAndStart(ServiceName, ServiceName, typeof(ProjectInstaller).Assembly.Location);
+            await Task.Run(() =>
+            {
+                ServiceInstaller.InstallAndStart(ServiceName, ServiceName, typeof(ProjectInstaller).Assembly.Location);
+            }).ConfigureAwait(false);
+
             OnPropertyChanged("IsInstalled");
             OnPropertyChanged("IsNotInstalled");
             OnPropertyChanged("Status");
         }
 
-        public void Uninstall()
+        public async Task UninstallAsync()
         {
-            ServiceInstaller.Uninstall(ServiceName);
+            await Task.Run(() =>
+            {
+                ServiceInstaller.Uninstall(ServiceName);
+            }).ConfigureAwait(false);
+
             OnPropertyChanged("IsInstalled");
             OnPropertyChanged("IsNotInstalled");
             OnPropertyChanged("Status");
         }
 
-        public void Stop()
+        public async Task StopAsync()
         {
-            CWService.Stop();
+            await Task.Run(() =>
+            {
+                CWService.Stop();
+                CWService.WaitForStatus(ServiceControllerStatus.Stopped);
+            }).ConfigureAwait(false);
+
             OnPropertyChanged("IsRunning");
             OnPropertyChanged("IsIsInstalledAndRunning");
             OnPropertyChanged("IsInstalledAndNotRunning");
             OnPropertyChanged("Status");
         }
 
-        public void Start()
+        public async Task StartAsync()
         {
-            CWService.Start();
+            await Task.Run(() =>
+            {
+                CWService.Start();
+                CWService.WaitForStatus(ServiceControllerStatus.Running);
+            }).ConfigureAwait(false);
+
+            
             OnPropertyChanged("IsRunning");
             OnPropertyChanged("IsIsInstalledAndRunning");
             OnPropertyChanged("IsInstalledAndNotRunning");

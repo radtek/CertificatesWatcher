@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CertificatesWatcher", "CertficatesWatcher\CertificatesWatcher.csproj", "{FA156C5F-2B3B-4C31-88C6-FBC3522ABEA5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CertificatesWatcher", "CertificatesWatcher\CertificatesWatcher.csproj", "{FA156C5F-2B3B-4C31-88C6-FBC3522ABEA5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{1DE03457-1EA1-4FDE-A714-BFB3DF39658C}"
 	ProjectSection(SolutionItems) = preProject

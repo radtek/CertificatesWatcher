@@ -39,8 +39,8 @@
             // 
             // ServiceInstaller
             // 
-            this.ServiceInstaller.DisplayName = "CreativeGroup\'s Certficates Watcher";
-            this.ServiceInstaller.ServiceName = "CertficatesWatcher";
+            this.ServiceInstaller.DisplayName = "Certificates Watcher";
+            this.ServiceInstaller.ServiceName = "CertificatesWatcher";
             this.ServiceInstaller.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
             // 
             // ProjectInstaller

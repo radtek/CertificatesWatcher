@@ -7,7 +7,7 @@ namespace CertificatesWatcher
     {
         private static readonly EventLog EventLog;
 
-        public const string LogName = "CertficatesWatcher";
+        public const string LogName = "CertificatesWatcher";
 
         static Logger()
         {

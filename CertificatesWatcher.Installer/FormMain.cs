@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using CertificatesWatcher.Installer.Properties;
 
@@ -18,58 +19,48 @@ namespace CertificatesWatcher.Installer
             cWServiceStateBindingSource.DataSource = new[] {_cwServiceState};
         }
 
-        private void ShowError()
+        private void ShowError(Exception e)
         {
             MessageBox.Show(this,
-                            Resources.The_operation_failed,
+                            Resources.The_operation_failed + Environment.NewLine + e.Message,
                             Resources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private void buttonInstall_Click(object sender, EventArgs e)
+        private async void buttonInstall_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _cwServiceState.Install();
-            }
-            catch
-            {
-                ShowError();
-            }
+            await ExecuteTask(() => _cwServiceState.Install());
         }
 
-        private void buttonStop_Click(object sender, EventArgs e)
+        private async void buttonUninstall_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _cwServiceState.Stop();
-            }
-            catch
-            {
-                ShowError();
-            }
+            await ExecuteTask(() => _cwServiceState.UninstallAsync());
         }
 
-        private void buttonStart_Click(object sender, EventArgs e)
+        private async void buttonStop_Click(object sender, EventArgs e)
         {
-            try
-            {
-                _cwServiceState.Start();
-            }
-            catch
-            {
-                ShowError();
-            }
+            await ExecuteTask(() => _cwServiceState.StopAsync());
         }
 
-        private void buttonUninstall_Click(object sender, EventArgs e)
+        private async void buttonStart_Click(object sender, EventArgs e)
+        {
+            await ExecuteTask(() => _cwServiceState.StartAsync());
+        }
+
+        private async Task ExecuteTask(Func<Task> action)
         {
             try
             {
-                _cwServiceState.Uninstall();
+                progressBar.Visible = true;
+                await action();
             }
-            catch
+            catch (Exception exception)
             {
-                ShowError();
+                ShowError(exception);
+                Validate(); //Проверяем состояние службы после неудачи
+            }
+            finally
+            {
+                progressBar.Visible = false;
             }
         }
     }

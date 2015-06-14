@@ -11,7 +11,7 @@ namespace CertificatesWatcher
         {
             var servicesToRun = new ServiceBase[]
             {
-                new CertficatesWatcherService()
+                new CertificatesWatcherService()
             };
             ServiceBase.Run(servicesToRun);
         }

@@ -1,6 +1,6 @@
 ﻿namespace CertificatesWatcher
 {
-    partial class CertficatesWatcherService
+    partial class CertificatesWatcherService
     {
         /// <summary> 
         /// Required designer variable.
@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             // 
-            // CertficatesWatcherService
+            // CertificatesWatcherService
             // 
-            this.ServiceName = "CertficatesWatcher Service";
+            this.ServiceName = "CertificatesWatcher Service";
 
         }
 

@@ -5,9 +5,9 @@ using System.ServiceProcess;
 
 namespace CertificatesWatcher
 {
-    public partial class CertficatesWatcherService : ServiceBase
+    public partial class CertificatesWatcherService : ServiceBase
     {
-        public CertficatesWatcherService()
+        public CertificatesWatcherService()
         {
             InitializeComponent();
         }
