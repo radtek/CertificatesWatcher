@@ -10,14 +10,14 @@ namespace CertificatesWatcher.Configuration
         private const string SectionName = "cw";
 
         private static readonly Lazy<Config> _current =
-            new Lazy<Config>(() => (Config)ConfigurationManager.GetSection(SectionName));
+            new Lazy<Config>(() => (Config)ConfigurationManager.GetSection(SectionName) ?? new Config());
 
 
         [ConfigurationProperty("mails", IsRequired = true)]
-        public string Mails { get; set; }
+        public string Mails { get { return (string)this["mails"]; } }
 
         [ConfigurationProperty("daysToExpiration", IsRequired = false, DefaultValue = 30)]
-        public int DaysToExpiration { get; set; }
+        public int DaysToExpiration { get { return (int)this["daysToExpiration"]; } }
 
         public static Config Current
         {

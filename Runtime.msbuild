@@ -1,0 +1,36 @@
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+		<Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
+    <StyleCopEnabled Condition=" '$(StyleCopEnabled)' == '' ">true</StyleCopEnabled>
+    <BuildPortable Condition=" '$(BuildPortable)' == '' ">true</BuildPortable>
+    <BuildInParallel Condition=" '$(BuildInParallel)' == '' And $(MSBuildNodeCount) &gt; 1 ">true</BuildInParallel>
+    <BuildInParallel Condition=" '$(BuildInParallel)' == '' ">false</BuildInParallel>
+    <AllowedReferenceRelatedFileExtensions Condition=" '$(AllowedReferenceRelatedFileExtensions)' == '' ">-</AllowedReferenceRelatedFileExtensions>
+    <NuGetExe>src\.nuget\NuGet.exe</NuGetExe>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <SolutionsToBuild Include="src\CertificatesWatcher.sln">
+      <BuildInParallel>$(BuildInParallel)</BuildInParallel>
+    </SolutionsToBuild>
+  </ItemGroup>
+
+  <Target Name="Clean">
+    <MSBuild
+        Projects="@(SolutionsToBuild)"
+        Targets="Clean"
+        Condition=" '%(SolutionsToBuild.Portable)' != 'true' or '$(BuildPortable)' == 'true' "
+        Properties="Configuration=$(Configuration);VisualStudioVersion=$(VisualStudioVersion)" />
+    <RemoveDir Directories="bin\$(Configuration)" />
+  </Target>
+
+  <Target Name="Build">
+    <!-- we need to batch the solution files since they both build Microsoft.TestCommon -->
+    <Error Condition=" '$(CodeAnalysis)' == 'true' and '$(Configuration)' == 'Release' " Text="Unable to run code analysis in Release configuration. Release assemblies do not include SuppressMessage attributes (so code analysis would always fail with the errors that are normally suppressed)." />
+    <MSBuild
+          Projects="@(SolutionsToBuild)"
+          BuildInParallel="%(SolutionsToBuild.BuildInParallel)"
+          Targets="Build"
+          Properties="Configuration=$(Configuration);CodeAnalysis=$(CodeAnalysis);VisualStudioVersion=$(VisualStudioVersion);OutputPath=$(TargetDir);AllowedReferenceRelatedFileExtensions=$(AllowedReferenceRelatedFileExtensions)" />
+  </Target>
+</Project>

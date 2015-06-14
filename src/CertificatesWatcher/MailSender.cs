@@ -12,6 +12,11 @@ namespace CertificatesWatcher
     {
         public void SendExpiringCertificates(ICollection<X509Certificate2> certificates)
         {
+            if (String.IsNullOrWhiteSpace(Config.Current.Mails))
+            {
+                throw new Exception("Could not send any mails. Target mail address is empty.");
+            }
+            
             MailMessage message = GetMessage(certificates);
 
             SetToAddress(message, Config.Current.Mails);

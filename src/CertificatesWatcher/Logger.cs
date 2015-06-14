@@ -21,6 +21,17 @@ namespace CertificatesWatcher
         public static void Write(string text, EventLogEntryType type)
         {
             EventLog.WriteEntry(text, type);
+
+            var message = String.Format("{1}: {0}", text, type);
+
+            if (type == EventLogEntryType.Error)
+            {
+                Console.Error.WriteLine(message);
+            }
+            else
+            {
+                Console.Out.WriteLine(message);
+            }
         }
     }
 }

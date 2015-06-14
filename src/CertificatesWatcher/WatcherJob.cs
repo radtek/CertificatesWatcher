@@ -10,7 +10,12 @@ namespace CertificatesWatcher
     {
         public static readonly CertificateWatcher CertificateWatcher = new CertificateWatcher();
 
-        public void Execute(IJobExecutionContext context)
+        void IJob.Execute(IJobExecutionContext context)
+        {
+            Execute();
+        }
+
+        public bool Execute()
         {
             var certificates = CertificateWatcher.GetExpiringCertificates(TimeSpan.FromDays(Config.Current.DaysToExpiration));
 
@@ -20,19 +25,21 @@ namespace CertificatesWatcher
                 {
                     var mailSender = new MailSender();
                     mailSender.SendExpiringCertificates(certificates);
-
+                    
                     Logger.Write("Mail about expiring certificates was created and sent.",
                         EventLogEntryType.Information);
                 }
                 catch (Exception ex)
                 {
-                    Logger.Write(ex.ToString(), EventLogEntryType.Error);
+                    Logger.Write(ex.Message, EventLogEntryType.Error);
+                    return false;
                 }
             }
             else
             {
                 Logger.Write("All certificates are OK.", EventLogEntryType.Information);
             }
+            return true;
         }
     }
 }
