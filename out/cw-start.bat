@@ -1,0 +1,1 @@
+"%~dp0bin\nssm.exe" start CertificateWatcher

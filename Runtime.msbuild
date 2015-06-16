@@ -21,7 +21,7 @@
         Targets="Clean"
         Condition=" '%(SolutionsToBuild.Portable)' != 'true' or '$(BuildPortable)' == 'true' "
         Properties="Configuration=$(Configuration);VisualStudioVersion=$(VisualStudioVersion)" />
-    <RemoveDir Directories="bin\$(Configuration)" />
+    <RemoveDir Directories="out\bin\$(Configuration)" />
   </Target>
 
   <Target Name="Build">
@@ -32,5 +32,7 @@
           BuildInParallel="%(SolutionsToBuild.BuildInParallel)"
           Targets="Build"
           Properties="Configuration=$(Configuration);CodeAnalysis=$(CodeAnalysis);VisualStudioVersion=$(VisualStudioVersion);OutputPath=$(TargetDir);AllowedReferenceRelatedFileExtensions=$(AllowedReferenceRelatedFileExtensions)" />
+          
+    <Copy SourceFiles='src\packages\NSSM.2.24\tools\win64\nssm.exe' DestinationFolder='out\bin\' />
   </Target>
 </Project>

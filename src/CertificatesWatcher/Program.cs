@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace CertificatesWatcher
 {
@@ -9,20 +10,27 @@ namespace CertificatesWatcher
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
-        private static void Main()
+        private static int Main()
         {
             if (new WatcherJob().Execute())
             {
                 ScheduleSettings.RegisterSchedulers();
 
                 Console.Out.WriteLine("Certificates Watcher is running.");
+
+                while (ScheduleSettings.Scheduler.IsStarted)
+                {
+                    Thread.Sleep(10000);
+                }
             }
             else
             {
-                Console.Out.WriteLine("Certificates Watcher enabled to start at first watching.");
+                Console.Out.WriteLine("Certificates Watcher can not be started at first watching.");
 
                 Environment.Exit(-1);
             }
+
+            return 0;
         }
     }
 }

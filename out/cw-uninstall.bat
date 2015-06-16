@@ -1,0 +1,1 @@
+"%~dp0bin\nssm.exe" remove CertificateWatcher confirm

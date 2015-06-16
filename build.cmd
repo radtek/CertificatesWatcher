@@ -4,7 +4,7 @@ setlocal
 
 :Build
 
-set TargetDir=%~dp0\bin
+set TargetDir=%~dp0\out\bin
 
 REM Find the most recent 32bit MSBuild.exe on the system. Require v12.0 (installed with VS2013) or later since .NET 4.0
 REM is not supported. Also handle x86 operating systems, where %ProgramFiles(x86)% is not defined. Always quote the

@@ -1,0 +1,1 @@
+"%~dp0bin\nssm.exe" install CertificateWatcher "%~dp0bin\CertificatesWatcher.exe"
