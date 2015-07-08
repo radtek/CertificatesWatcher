@@ -2,16 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
+using CertificatesWatcher.Configuration;
 
 namespace CertificatesWatcher
 {
     public class CertificateWatcher
     {
-        private readonly ICollection<X509Store> _stores = new List<X509Store>
-            {
-                new X509Store(StoreName.My, StoreLocation.LocalMachine),
-                new X509Store(StoreName.CertificateAuthority, StoreLocation.LocalMachine)
-            };
+        private readonly ICollection<X509Store> _stores;
+        private readonly HashSet<string> _ignoringThumbprints;
+
+        public CertificateWatcher()
+        {
+            _stores = Config.Current.WatchingStores.Select(store => new X509Store(store.Name, StoreLocation.LocalMachine)).ToArray();
+            _ignoringThumbprints = new HashSet<string>(Config.Current.IgnoringCertificates.Select(cert => cert.Thumbprint), StringComparer.InvariantCultureIgnoreCase); 
+        }
 
         private sealed class StoresWraper : IDisposable
         {
@@ -60,8 +64,11 @@ namespace CertificatesWatcher
         {
             using (var wrapper = new StoresWraper(_stores))
             {
-                return
-                    wrapper.Certificates.Where(cert => (cert.NotAfter - DateTime.Now) < beforeExpiration).OrderBy(cert => cert.NotAfter).ToList();
+                return (from cert in wrapper.Certificates
+                        where (cert.NotAfter - DateTime.Now) < beforeExpiration &&
+                              !_ignoringThumbprints.Contains(cert.Thumbprint)
+                        orderby cert.NotAfter
+                        select cert).ToArray();
             }
         }
     }
